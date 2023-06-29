@@ -10,3 +10,6 @@ https://developers.google.com/oauthplayground/
 ## depannage suite a probleme
 https://github.com/nodemailer/nodemailer/issues/1098
 
+# 29/06/2023
+code: 'EENVELOPE',
+  response: '530-5.7.0 Authentication Require

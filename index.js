@@ -3,12 +3,15 @@ const nodemailer = require ('nodemailer');
 const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
 
+
+// Creation Client OAUTH2
 const oauth2Client = new OAuth2 (
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
     process.env.URL_REDIRECTION
 ); 
 
+//Refresh Token
 oauth2Client.setCredentials({
     refresh_token:process.env.REFRESH_TOKEN
 });
@@ -17,6 +20,7 @@ const accesToken = oauth2Client.getAccessToken()
 
 //console.log (accesToken)
 
+//Creation transporter nodemailer
 const smtpTransport =  nodemailer.createTransport({ 
     service :"gmail", 
     auth :  { 
@@ -32,6 +36,8 @@ const smtpTransport =  nodemailer.createTransport({
     }
 });
 
+//Verify connection of transporter
+
 smtpTransport.verify(function (error, success) {
     if (error) {
       console.log(error);
@@ -40,6 +46,7 @@ smtpTransport.verify(function (error, success) {
     }
 });
 
+//Creation of Mail
 
 const mailOptions =  { 
   from :"bouget.mathieu69@gmail.com", 
@@ -48,6 +55,8 @@ const mailOptions =  {
   generateTextFromHTML : true , 
   html :  "<b>test</b>" 
 };
+
+//Send Email
 
 smtpTransport.sendMail(mailOptions, (error, response) => { 
   if(error){
