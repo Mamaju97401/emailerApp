@@ -3,18 +3,21 @@ const nodemailer = require ('nodemailer');
 const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
 
-
+/*
 // Creation Client OAUTH2
 const oauth2Client = new OAuth2 (
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
     process.env.URL_REDIRECTION
 ); 
+*/
 
+/*
 //Refresh Token
 oauth2Client.setCredentials({
     refresh_token:process.env.REFRESH_TOKEN
 });
+
 
 const accesToken = oauth2Client.getAccessToken()
 
@@ -35,7 +38,19 @@ const smtpTransport =  nodemailer.createTransport({
       rejectUnauthorized : false 
     }
 });
+*/
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com', // Remplacez par le serveur SMTP approprié
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+      user: process.env.MAIL_CLIENT, // Remplacez par votre adresse e-mail
+      pass: process.env.CLIENT_MDP // Remplacez par votre mot de passe d'e-mail
+  }
+});
+
+/*
 //Verify connection of transporter
 
 smtpTransport.verify(function (error, success) {
@@ -45,20 +60,23 @@ smtpTransport.verify(function (error, success) {
       console.log("Server is ready to take our messages");
     }
 });
+*/
 
 //Creation of Mail
 
 const mailOptions =  { 
   from :"bouget.mathieu69@gmail.com", 
-  to :"julieaudelallemand@gmail.com", 
+  cc: [ "julieaudelallemand@gmail.com", 
+        "bouget.mathieu@live.fr"
+      ],
   subject :  "Node.js Email with Secure OAuth", 
   generateTextFromHTML : true , 
-  html :  "<b>test</b>" 
+  html :  "<b>It's Work ......it's live... </b>" 
 };
 
 //Send Email
 
-smtpTransport.sendMail(mailOptions, (error, response) => { 
+transporter.sendMail(mailOptions, (error, response) => { 
   if(error){
     console.log(error)
   } else {

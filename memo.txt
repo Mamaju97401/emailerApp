@@ -1,0 +1,13 @@
+nslookup smtp.gmail.com
+Server:         127.0.0.53
+Address:        127.0.0.53#53
+
+Non-authoritative answer:
+Name:   smtp.gmail.com
+Address: 173.194.76.108
+Name:   smtp.gmail.com
+Address: 2a00:1450:400c:c09::6c
+
+
+Mot de passe application google 
+oymy yveo wmig ynkd
